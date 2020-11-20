@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://https://www.opertusmundi.eu/contract_ontology#"
+     xml:base="http://https://www.opertusmundi.eu/contract_ontology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:Analytics="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"
+     xmlns:contract_ontology="http://www.opertusmundi.eu/contract_ontology#"
+     xmlns:AnnotationVocabulary="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+     xmlns:SpecificationMetadata="http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+    <owl:Ontology rdf:about="http://www.opertusmundi.eu/contract_ontology">
+        <owl:versionIRI rdf:resource="http://https://www.opertusmundi.eu/contract_ontology/0.1.0"/>
+        <owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#todo -->
+
+    <owl:AnnotationProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#todo"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#Identifier -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Identifier">
+        <rdfs:subClassOf rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/CodeElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#Order -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Order">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/hasDateTime"/>
+                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/DateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/isIdentifiedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <contract_ontology:todo>PW: Not clear whether this should be modelled as a document or, mor abstractly, as a mere intend.</contract_ontology:todo>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#Supplier -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Supplier">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/LegallyCapableAdult"/>
+                    <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/Organization"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/hasAddress"/>
+                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/Address"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/isIdentifiedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://www.opertusmundi.eu/contract_ontology#Customer -->
+
+    <owl:Class rdf:about="https://www.opertusmundi.eu/contract_ontology#Customer">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.omg.org/techprocess/ab/SpecificationMetadata/Organization"/>
+                    <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/LegallyCapableAdult"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/hasAddress"/>
+                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/Address"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/isIdentifiedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
