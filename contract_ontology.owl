@@ -8,12 +8,14 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:schema="http://schema.org/"
      xmlns:Analytics="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"
      xmlns:contract_ontology="http://www.opertusmundi.eu/contract_ontology#"
      xmlns:AnnotationVocabulary="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
      xmlns:SpecificationMetadata="http://www.omg.org/techprocess/ab/SpecificationMetadata/">
     <owl:Ontology rdf:about="http://www.opertusmundi.eu/contract_ontology">
         <owl:versionIRI rdf:resource="http://https://www.opertusmundi.eu/contract_ontology/0.1.0"/>
+        <owl:imports rdf:resource="https://schema.org/version/latest/schemaorg-current-http.rdf"/>
         <owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/"/>
     </owl:Ontology>
     
@@ -39,11 +41,50 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#hasAccount -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#hasAccount">
+        <rdfs:subPropertyOf rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/has"/>
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
+        <rdfs:range rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioAccount"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#hasPassword -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#hasPassword">
+        <rdfs:subPropertyOf rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/has"/>
+        <rdfs:domain rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioAccount"/>
+        <rdfs:range rdf:resource="http://www.opertusmundi.eu/contract_ontology#Password"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#DataProduct -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#DataProduct">
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioProduct"/>
+    </owl:Class>
     
 
 
@@ -55,22 +96,26 @@
     
 
 
-    <!-- http://www.opertusmundi.eu/contract_ontology#Order -->
+    <!-- http://www.opertusmundi.eu/contract_ontology#Password -->
 
-    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Order">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/hasDateTime"/>
-                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/DateTime"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/isIdentifiedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <contract_ontology:todo>PW: Not clear whether this should be modelled as a document or, mor abstractly, as a mere intend.</contract_ontology:todo>
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Password">
+        <rdfs:subClassOf rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/CodeElement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#Service -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Service">
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioProduct"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#Subscription -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Subscription">
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioProduct"/>
     </owl:Class>
     
 
@@ -89,8 +134,27 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#hasAccount"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioAccount"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/hasAddress"/>
                 <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/Address"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#TopioAccount -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#TopioAccount">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#hasPassword"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Password"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -99,6 +163,15 @@
                 <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <contract_ontology:todo>PW: Find a more specific super class for TopioAccount</contract_ontology:todo>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#TopioProduct -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#TopioProduct">
+        <rdfs:subClassOf rdf:resource="http://schema.org/Product"/>
     </owl:Class>
     
 
@@ -117,17 +190,36 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/hasAddress"/>
-                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/Address"/>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#hasAccount"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioAccount"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/isIdentifiedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/hasAddress"/>
+                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/Address"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#topio_terms_and_conditions_v0.1.0 -->
+
+    <owl:NamedIndividual rdf:about="http://www.opertusmundi.eu/contract_ontology#topio_terms_and_conditions_v0.1.0">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractDocument"/>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 
