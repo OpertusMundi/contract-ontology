@@ -16,7 +16,6 @@
     <owl:Ontology rdf:about="http://www.opertusmundi.eu/contract_ontology">
         <owl:versionIRI rdf:resource="http://https://www.opertusmundi.eu/contract_ontology/0.1.0"/>
         <owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/"/>
-        <contract_ontology:todo xml:lang="en">PW: Restrictions for file (data product) acces to a specified number of devices or volumes still missing. Not sure ATM whether this is a restriction on the file access or the data product. Also not clear whether this will be needed.</contract_ontology:todo>
     </owl:Ontology>
     
 
@@ -80,8 +79,16 @@
 
     <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#hasAccount">
         <rdfs:subPropertyOf rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/has"/>
-        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
+        <rdfs:domain rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioUser"/>
         <rdfs:range rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioAccount"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#hasDeliveryDateTime -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#hasDeliveryDateTime">
+        <rdfs:subPropertyOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/hasDateTime"/>
     </owl:ObjectProperty>
     
 
@@ -132,6 +139,43 @@
     
 
 
+    <!-- http://www.opertusmundi.eu/contract_ontology#license -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#license">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/Contract"/>
+        <rdfs:range rdf:resource="http://www.opertusmundi.eu/contract_ontology#License"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#orderCustomer -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#orderCustomer">
+        <rdfs:domain rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioOrder"/>
+        <rdfs:range rdf:resource="https://www.opertusmundi.eu/contract_ontology#Customer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#orderItems -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#orderItems">
+        <rdfs:domain rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioOrder"/>
+        <rdfs:range rdf:resource="http://www.opertusmundi.eu/contract_ontology#OrderItemCollection"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#orderSupplier -->
+
+    <owl:ObjectProperty rdf:about="http://www.opertusmundi.eu/contract_ontology#orderSupplier">
+        <rdfs:domain rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioOrder"/>
+        <rdfs:range rdf:resource="http://www.opertusmundi.eu/contract_ontology#Supplier"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -153,15 +197,6 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#DataProduct">
         <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioProduct"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opertusmundi.eu/contract_ontology#DurationOfTheAgreement -->
-
-    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#DurationOfTheAgreement">
-        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/Duration"/>
-        <contract_ontology:todo>PW: Not too sure, it makes sense to model it like that.</contract_ontology:todo>
     </owl:Class>
     
 
@@ -193,9 +228,7 @@
 
     <!-- http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight -->
 
-    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight">
-        <contract_ontology:todo xml:lang="en">PW: There should probably be a suitable base class but I didn&apos;t find any among the classes of the imported ontologies.</contract_ontology:todo>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight"/>
     
 
 
@@ -220,20 +253,6 @@
                 <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/Duration"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/hasDuration"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.opertusmundi.eu/contract_ontology#DurationOfTheAgreement"/>
-                            <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/ExplicitDuration"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <contract_ontology:todo>PW: Not sure whether we should model this as the legal document (definition 1 at https://en.wiktionary.org/wiki/license#Noun ) or as a collection of legal terms (definition 2 at https://en.wiktionary.org/wiki/license#Noun )</contract_ontology:todo>
     </owl:Class>
     
 
@@ -272,6 +291,47 @@
     
 
 
+    <!-- http://www.opertusmundi.eu/contract_ontology#OrderItem -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#OrderItem">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/CollectionConstituent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#hasDeliveryDateTime"/>
+                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/DateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/isConstituentOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#OrderItemCollection"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/refersTo"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioProduct"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#OrderItemCollection -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#OrderItemCollection">
+        <rdfs:subClassOf rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/Collection"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/hasConstituent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.opertusmundi.eu/contract_ontology#OrderItem"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.opertusmundi.eu/contract_ontology#Password -->
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Password">
@@ -284,8 +344,7 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#RightOfAdaption">
         <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight"/>
-        <contract_ontology:todo xml:lang="en">PW: Check whether the textual definition is still in sync.</contract_ontology:todo>
-        <rdfs:comment xml:lang="en">The right of adaptation, arrangement, modification, correction of errors, and the right to transform, integrate, incorporate, in whole or in part and in any written, oral, telematic, digital, etc. form, all or part of the Products for the purpose of any type of exploitation.</rdfs:comment>
+        <skos:definition xml:lang="en">The right of adaptation, arrangement, modification, correction of errors, and the right to transform, integrate, incorporate, in whole or in part and in any written, oral, telematic, digital, etc. form, all or part of the Products for the purpose of any type of exploitation.</skos:definition>
     </owl:Class>
     
 
@@ -294,8 +353,7 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#RightOfTranslation">
         <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight"/>
-        <contract_ontology:todo xml:lang="en">PW: Check whether the textual definition is still in sync.</contract_ontology:todo>
-        <rdfs:comment xml:lang="en">The right of translation, which includes the right to establish or have established any version, in any language, and in any computer language, of all or part of each of the Products.</rdfs:comment>
+        <skos:definition xml:lang="en">The right of translation, which includes the right to establish or have established any version, in any language, and in any computer language, of all or part of each of the Products.</skos:definition>
     </owl:Class>
     
 
@@ -304,8 +362,7 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#RightToMarket">
         <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight"/>
-        <contract_ontology:todo xml:lang="en">PW: Check whether the textual definition is still in sync.</contract_ontology:todo>
-        <rdfs:comment xml:lang="en">The right to market, grant or assign rights of use, to rent, to lend, to reproduce, to represent, exhibit, display, disseminate and exploit all or part of the Products in the original version or in any adapted, arranged, modified, corrected, transformed, abridged or extended version, or translated, whether in return for payment or free of charge by any means of communication to the public known to date and in particular by public recitation, by television broadcasting, including radio broadcasting, satellite transmission, initial or secondary, active or passive cable distribution, by public projection, by transmission in a public place, by digital transmission on line or on a support, by public presentation and any other means.</rdfs:comment>
+        <skos:definition xml:lang="en">The right to market, grant or assign rights of use, to rent, to lend, to reproduce, to represent, exhibit, display, disseminate and exploit all or part of the Products in the original version or in any adapted, arranged, modified, corrected, transformed, abridged or extended version, or translated, whether in return for payment or free of charge by any means of communication to the public known to date and in particular by public recitation, by television broadcasting, including radio broadcasting, satellite transmission, initial or secondary, active or passive cable distribution, by public projection, by transmission in a public place, by digital transmission on line or on a support, by public presentation and any other means.</skos:definition>
     </owl:Class>
     
 
@@ -314,8 +371,7 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#RightToPublish">
         <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight"/>
-        <contract_ontology:todo xml:lang="en">PW: Check whether the textual definition is still in sync.</contract_ontology:todo>
-        <rdfs:comment xml:lang="en">The right to publish, disseminate, edit and republish, without limitation in quantity, including the right of reprography and the rights derived therefrom.</rdfs:comment>
+        <skos:definition xml:lang="en">The right to publish, disseminate, edit and republish, without limitation in quantity, including the right of reprography and the rights derived therefrom.</skos:definition>
     </owl:Class>
     
 
@@ -324,8 +380,7 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#RightToReproduce">
         <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#IntellectualPropertyRight"/>
-        <contract_ontology:todo xml:lang="en">Check whether the textual definition is still in sync</contract_ontology:todo>
-        <rdfs:comment xml:lang="en">The right to reproduce without limitation in number, digitise, download, store, duplicate, print, record all or part of each of the Products, for the purposes covered by the License and in any manner whatsoever, in particular, by any technical process, on any media, in any format and via any tool, software, platform, website, mobile application or other system, known or unknown; the present right of reproduction including the right of permanent or temporary reproduction of any software in whole or in part, by any means and in any form, in particular for any loading, display, execution, transmission or storage operation.</rdfs:comment>
+        <skos:definition xml:lang="en">The right to reproduce without limitation in number, digitise, download, store, duplicate, print, record all or part of each of the Products, for the purposes covered by the License and in any manner whatsoever, in particular, by any technical process, on any media, in any format and via any tool, software, platform, website, mobile application or other system, known or unknown; the present right of reproduction including the right of permanent or temporary reproduction of any software in whole or in part, by any means and in any form, in particular for any loading, display, execution, transmission or storage operation.</skos:definition>
     </owl:Class>
     
 
@@ -358,26 +413,6 @@
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#Supplier">
         <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
-        <rdfs:subClassOf>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/LegallyCapableAdult"/>
-                    <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/Organization"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#hasAccount"/>
-                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioAccount"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/hasAddress"/>
-                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/Address"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -397,7 +432,6 @@
                 <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Identifier"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <contract_ontology:todo>PW: Find a more specific super class for TopioAccount</contract_ontology:todo>
     </owl:Class>
     
 
@@ -423,7 +457,6 @@
                 <owl:allValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioPayment"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <contract_ontology:todo xml:lang="en">PW: Find a proper base class.</contract_ontology:todo>
     </owl:Class>
     
 
@@ -431,6 +464,30 @@
     <!-- http://www.opertusmundi.eu/contract_ontology#TopioOrder -->
 
     <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#TopioOrder">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#orderCustomer"/>
+                <owl:someValuesFrom rdf:resource="https://www.opertusmundi.eu/contract_ontology#Customer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#orderItems"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#OrderItemCollection"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#orderSupplier"/>
+                <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Supplier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/hasEffectiveDate"/>
+                <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/Date"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.opertusmundi.eu/contract_ontology#ledTo"/>
@@ -445,7 +502,6 @@
                 <owl:onClass rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/Contract"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <contract_ontology:todo xml:lang="en">PW: Find proper base class.</contract_ontology:todo>
     </owl:Class>
     
 
@@ -459,7 +515,6 @@
                 <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioInvoice"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <contract_ontology:todo xml:lang="en">PW: Find proper base class.</contract_ontology:todo>
     </owl:Class>
     
 
@@ -472,27 +527,9 @@
     
 
 
-    <!-- http://www.opertusmundi.eu/contract_ontology#TransferableLicense -->
+    <!-- http://www.opertusmundi.eu/contract_ontology#TopioUser -->
 
-    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#TransferableLicense">
-        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#License"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.opertusmundi.eu/contract_ontology#WebApplicationPlatform -->
-
-    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#WebApplicationPlatform">
-        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioDeliveryMethod"/>
-        <contract_ontology:todo xml:lang="en">PW: Not clear to me what this means. Just copied the term from master template agreement.</contract_ontology:todo>
-    </owl:Class>
-    
-
-
-    <!-- https://www.opertusmundi.eu/contract_ontology#Customer -->
-
-    <owl:Class rdf:about="https://www.opertusmundi.eu/contract_ontology#Customer">
-        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#TopioUser">
         <rdfs:subClassOf>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -517,6 +554,30 @@
     
 
 
+    <!-- http://www.opertusmundi.eu/contract_ontology#TransferableLicense -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#TransferableLicense">
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#License"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.opertusmundi.eu/contract_ontology#WebApplicationPlatform -->
+
+    <owl:Class rdf:about="http://www.opertusmundi.eu/contract_ontology#WebApplicationPlatform">
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioDeliveryMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.opertusmundi.eu/contract_ontology#Customer -->
+
+    <owl:Class rdf:about="https://www.opertusmundi.eu/contract_ontology#Customer">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractParty"/>
+    </owl:Class>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -533,6 +594,27 @@
     <owl:NamedIndividual rdf:about="http://www.opertusmundi.eu/contract_ontology#topio_terms_and_conditions_v0.1.0">
         <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/ContractDocument"/>
     </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/playsRole"/>
+        <owl:someValuesFrom rdf:resource="http://www.opertusmundi.eu/contract_ontology#Supplier"/>
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioUser"/>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/playsRole"/>
+        <owl:someValuesFrom rdf:resource="https://www.opertusmundi.eu/contract_ontology#Customer"/>
+        <rdfs:subClassOf rdf:resource="http://www.opertusmundi.eu/contract_ontology#TopioUser"/>
+    </owl:Restriction>
 </rdf:RDF>
 
 
